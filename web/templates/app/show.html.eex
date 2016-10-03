@@ -1,0 +1,18 @@
+<h2>Show app</h2>
+
+<ul>
+
+  <li>
+    <strong>User:</strong>
+    <%= @app.user_id %>
+  </li>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @app.name %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: app_path(@conn, :edit, @app) %>
+<%= link "Back", to: app_path(@conn, :index) %>

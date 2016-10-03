@@ -1,0 +1,55 @@
+<h2>Listing apps</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Name</th>
+      <th>API Key</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for app <- @apps do %>
+    <tr>
+      <td><%= app.user_id %></td>
+      <td><%= app.name %></td>
+      <td><%= app.api_key %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: app_path(@conn, :show, app), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: app_path(@conn, :edit, app), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: app_path(@conn, :delete, app), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<br>
+
+<p>
+  You can now use your API keys to make batch requests in the following format:
+</p>
+<div>
+  <pre>
+
+    POST http://localhost:4000/api/v1/batch
+
+    Authorization: {YOUR_API_KEY}
+    Host: outlook.office.com
+    Content-Type: application/json
+
+    [{
+      "uri": "https://office.outlook.com/api/beta/me/messages",
+      "headers": [
+        "authorization": "Bearer asdasdaq3ariosdf3"
+      ],
+      "body": {
+        "whatever": "you want"
+      }
+    }]
+  </pre>
+</div>
+
+<%= link "New app", to: app_path(@conn, :new) %>
